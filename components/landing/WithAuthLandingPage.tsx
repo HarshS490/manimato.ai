@@ -2,10 +2,10 @@ import React from 'react'
 
 type Props = {}
 
-function WithAuthLandingPage({}: Props) {
+function ChatUI({}: Props) {
   return (
     <div>WithAuthLandingPage</div>
   )
 }
 
-export default WithAuthLandingPage;
+export default ChatUI;

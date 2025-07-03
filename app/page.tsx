@@ -1,4 +1,4 @@
-import WithoutAuthLandingPage from '@/components/landing/WithoutAuthLandingPage';
+import LandingPage from '@/components/landing/WithoutAuthLandingPage';
 import React from 'react'
 
 type Props = {}
@@ -6,7 +6,7 @@ type Props = {}
 function page({}: Props) {
   return (
     <div>
-      <WithoutAuthLandingPage/>
+      <LandingPage/>
     </div>
   )
 }

@@ -9,7 +9,7 @@ import { Navigation } from "./sections/navigation"
 
 
 
-export default function WithoutAuthLandingPage() {
+export default function LandingPage() {
   const handleGetStarted = () => {
     // Navigate to the main app
     window.location.href = "/"
