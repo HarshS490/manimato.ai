@@ -1,4 +1,4 @@
-import LandingPage from '@/components/landing/WithoutAuthLandingPage';
+import LandingPage from '@/components/landing/LadingPage';
 import React from 'react'
 
 type Props = {}
