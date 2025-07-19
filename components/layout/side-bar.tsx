@@ -1,64 +1,100 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Plus, MessageSquare, Edit2, Trash2, Check, X } from "lucide-react"
-import { useChat } from "@/context/ChatProvider"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Plus,
+  MessageSquare,
+  Edit2,
+  Trash2,
+  Check,
+  X,
+  SidebarCloseIcon,
+  SidebarOpenIcon,
+} from "lucide-react";
+import { useChat } from "@/context/ChatProvider";
+import clsx from "clsx";
 
-interface SidebarProps {
-  onClose: () => void
-}
+export function Sidebar() {
+  const { chats, deleteChat, renameChat } = useChat();
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [isOpen, setIsOpen] = useState(true);
+  const router = useRouter();
 
-export function Sidebar({ onClose }: SidebarProps) {
-  const { chats, deleteChat, renameChat } = useChat()
-  const [editingId, setEditingId] = useState<string | null>(null)
-  const [editTitle, setEditTitle] = useState("")
-  const router = useRouter()
+  const onClose = () => {
+    setIsOpen((prev) => !prev);
+  };
 
   const handleNewChat = () => {
-    router.push("/new")
-    onClose()
-  }
+    router.push("/new");
+  };
 
   const handleChatClick = (chatId: string) => {
-    router.push(`/chat/${chatId}`)
-    onClose()
-  }
+    router.push(`/chat/${chatId}`);
+  };
 
   const handleEditStart = (chat: any) => {
-    setEditingId(chat.id)
-    setEditTitle(chat.title)
-  }
+    setEditingId(chat.id);
+    setEditTitle(chat.title);
+  };
 
   const handleEditSave = () => {
     if (editingId && editTitle.trim()) {
-      renameChat(editingId, editTitle.trim())
+      renameChat(editingId, editTitle.trim());
     }
-    setEditingId(null)
-    setEditTitle("")
-  }
+    setEditingId(null);
+    setEditTitle("");
+  };
 
   const handleEditCancel = () => {
-    setEditingId(null)
-    setEditTitle("")
-  }
+    setEditingId(null);
+    setEditTitle("");
+  };
 
   const handleDelete = (chatId: string) => {
-    deleteChat(chatId)
-  }
+    deleteChat(chatId);
+  };
 
   return (
-    <div className="w-80 h-full bg-sidebar border-r border-sidebar-border flex flex-col">
+    <div
+      className={clsx(
+        " shrink-0 h-full bg-sidebar border-r border-sidebar-border flex flex-col",
+        isOpen ? "w-80" : "w-15",
+        "transition-all duration-300 ease-in-out"
+      )}
+    >
       {/* Header */}
-      <div className="p-4 border-b border-sidebar-border">
+      <div className="p-4 border-b border-sidebar-border flex flex-col gap-4">
+        <Button
+          onClick={onClose}
+          variant={"ghost"}
+          className={clsx(
+            "cursor-pointer flex items-center justify-center p-0 size-7 [&_svg]:size-6",
+            isOpen?"self-end":"self-center"
+          )}
+        >
+          {isOpen ? <SidebarCloseIcon /> : <SidebarOpenIcon />}
+        </Button>
+
         <Button
           onClick={handleNewChat}
-          className="w-full bg-sidebar-accent hover:bg-sidebar-accent/80 text-sidebar-accent-foreground border border-sidebar-border"
+          className=" cursor-pointer flex items-center justify-center w-full bg-sidebar-accent hover:bg-sidebar-accent/80 text-sidebar-accent-foreground border border-sidebar-border"
         >
-          <Plus size={16} className="mr-2" />
-          New Chat
+          <Plus size={16} />
+          <span
+            className={clsx(
+              "overflow-hidden whitespace-nowrap",
+              isOpen
+                ? "ml-2 w-auto opacity-100 delay-150"
+                : "w-0 ml-0 opacity-0",
+              "transition-all duration-300 ease-in-out"
+            )}
+          >
+            New Chat
+          </span>
         </Button>
       </div>
 
@@ -84,8 +120,8 @@ export function Sidebar({ onClose }: SidebarProps) {
                       onChange={(e) => setEditTitle(e.target.value)}
                       className="flex-1 bg-sidebar-accent border-sidebar-border text-sidebar-foreground text-sm"
                       onKeyDown={(e) => {
-                        if (e.key === "Enter") handleEditSave()
-                        if (e.key === "Escape") handleEditCancel()
+                        if (e.key === "Enter") handleEditSave();
+                        if (e.key === "Escape") handleEditCancel();
                       }}
                       autoFocus
                     />
@@ -108,8 +144,13 @@ export function Sidebar({ onClose }: SidebarProps) {
                   </div>
                 ) : (
                   <>
-                    <div onClick={() => handleChatClick(chat.id)} className="flex-1">
-                      <h3 className="text-sidebar-foreground text-sm font-medium truncate">{chat.title}</h3>
+                    <div
+                      onClick={() => handleChatClick(chat.id)}
+                      className="flex-1"
+                    >
+                      <h3 className="text-sidebar-foreground text-sm font-medium truncate">
+                        {chat.title}
+                      </h3>
                     </div>
 
                     <div className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity flex space-x-1">
@@ -117,8 +158,8 @@ export function Sidebar({ onClose }: SidebarProps) {
                         size="sm"
                         variant="ghost"
                         onClick={(e) => {
-                          e.stopPropagation()
-                          handleEditStart(chat)
+                          e.stopPropagation();
+                          handleEditStart(chat);
                         }}
                         className="text-sidebar-foreground/60 hover:text-sidebar-foreground p-1"
                       >
@@ -128,8 +169,8 @@ export function Sidebar({ onClose }: SidebarProps) {
                         size="sm"
                         variant="ghost"
                         onClick={(e) => {
-                          e.stopPropagation()
-                          handleDelete(chat.id)
+                          e.stopPropagation();
+                          handleDelete(chat.id);
                         }}
                         className="text-destructive hover:text-destructive/80 p-1"
                       >
@@ -144,5 +185,5 @@ export function Sidebar({ onClose }: SidebarProps) {
         )}
       </div>
     </div>
-  )
+  );
 }
