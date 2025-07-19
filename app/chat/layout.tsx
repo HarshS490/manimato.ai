@@ -1,12 +1,19 @@
+import { Sidebar } from '@/components/layout/side-bar'
 import React from 'react'
 
-type Props = {}
+type Props = {
+  children: React.ReactNode
+}
 
-function layout({}: Props) {
+function layout({children}: Props) {
   return (
-    <div>
-      {/* SideBar */}
-      {/* Chat Page */}
+    <div className='h-svh flex'>
+      <Sidebar/>
+      <div className='h-full'>
+        {
+          children
+        }
+      </div>
     </div>
   )
 }

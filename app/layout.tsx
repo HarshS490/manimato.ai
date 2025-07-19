@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Provider from '@/context/Provider';
 
 export const metadata = {
   title: "Manimato.ai – Turn Prompts into Code & Video",
@@ -50,8 +51,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <Provider>
+          {children}
+        </Provider>
+      </body>
     </html>
   )
 }
