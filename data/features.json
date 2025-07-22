@@ -1,0 +1,23 @@
+[
+  {
+    "id": "ai-generation",
+    "icon": "Zap",
+    "title": "AI-powered code generation for mathematical precision",
+    "description": "Our advanced AI system generates clean, optimized Python code for complex mathematical visualizations and animations.",
+    "link": "Learn more"
+  },
+  {
+    "id": "real-time",
+    "icon": "Play",
+    "title": "Real-time preview and instant feedback",
+    "description": "See your mathematical concepts come to life instantly with our real-time preview system and interactive feedback.",
+    "link": "Learn more"
+  },
+  {
+    "id": "export",
+    "icon": "Code2",
+    "title": "Export and integrate with your workflow",
+    "description": "Export your animations in multiple formats and integrate seamlessly with your existing mathematical workflow.",
+    "link": "Learn more"
+  }
+]

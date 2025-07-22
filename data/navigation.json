@@ -1,0 +1,28 @@
+{
+  "brand": {
+    "name": "Manimato",
+    "logo": "M"
+  },
+  "links": [
+    { "href": "#product", "label": "Product" },
+    { "href": "#examples", "label": "Examples" },
+    { "href": "#pricing", "label": "Pricing" },
+    { "href": "#docs", "label": "Docs" }
+  ],
+  "footer": {
+    "sections": [
+      {
+        "title": "Product",
+        "links": ["Features", "Examples", "Pricing", "API"]
+      },
+      {
+        "title": "Resources",
+        "links": ["Documentation", "Tutorials", "Blog", "Community"]
+      },
+      {
+        "title": "Company",
+        "links": ["About", "Contact", "Privacy", "Terms"]
+      }
+    ]
+  }
+}

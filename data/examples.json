@@ -1,0 +1,44 @@
+[
+  {
+    "id": "fourier",
+    "title": "Fourier Transform",
+    "description": "Signal processing and frequency analysis",
+    "code": "fourier_transform(signal)",
+    "visual": "fourier"
+  },
+  {
+    "id": "surface",
+    "title": "3D Surface Plotting",
+    "description": "Multi-variable calculus visualization",
+    "code": "plot_surface(x, y, z)",
+    "visual": "surface"
+  },
+  {
+    "id": "parametric",
+    "title": "Parametric Equations",
+    "description": "Curve and surface generation",
+    "code": "parametric_curve(t)",
+    "visual": "parametric"
+  },
+  {
+    "id": "matrix",
+    "title": "Matrix Transformations",
+    "description": "Linear algebra operations",
+    "code": "transform_matrix(A)",
+    "visual": "matrix"
+  },
+  {
+    "id": "differential",
+    "title": "Differential Equations",
+    "description": "Dynamic system visualization",
+    "code": "solve_ode(dy_dt)",
+    "visual": "differential"
+  },
+  {
+    "id": "complex",
+    "title": "Complex Analysis",
+    "description": "Complex function visualization",
+    "code": "complex_plot(f)",
+    "visual": "complex"
+  }
+]

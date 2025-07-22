@@ -1,0 +1,46 @@
+{
+  "hero": {
+    "title": {
+      "main": "Create stunning",
+      "highlight": "math animations",
+      "suffix": "with AI precision"
+    },
+    "subtitle": "Transform complex mathematical concepts into beautiful, interactive visualizations. Generate Python code instantly with our AI-powered platform.",
+    "primaryCta": "Start creating",
+    "secondaryCta": "View examples",
+    "features": [
+      { "label": "AI-Powered Generation", "color": "emerald-500" },
+      { "label": "Python & Manim Ready", "color": "emerald-500" },
+      { "label": "Real-time Preview", "color": "emerald-500" }
+    ]
+  },
+  "examples": {
+    "title": {
+      "main": "Mathematical concepts",
+      "highlight": "brought to life"
+    },
+    "subtitle": "See how Manimato transforms complex mathematical ideas into beautiful, interactive visualizations with AI-generated Python code."
+  },
+  "bestInClass": {
+    "title": {
+      "main": "Best-in-class mathematical",
+      "highlight": "code generation"
+    },
+    "subtitle": "Powered by advanced AI models, Manimato generates clean, optimized Python code for complex mathematical visualizations. From simple equations to advanced 3D surfaces.",
+    "capabilities": [
+      { "label": "Advanced equation rendering", "active": true },
+      { "label": "3D surface visualization", "active": true },
+      { "label": "Animation timeline control", "active": true },
+      { "label": "Export to multiple formats", "active": true }
+    ]
+  },
+  "cta": {
+    "title": {
+      "main": "Ready to transform your",
+      "highlight": "mathematical concepts?"
+    },
+    "subtitle": "Join thousands of researchers and educators who trust Manimato for their mathematical visualization needs.",
+    "primaryCta": "Start creating now",
+    "secondaryCta": "View documentation"
+  }
+}
