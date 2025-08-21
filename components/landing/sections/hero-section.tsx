@@ -1,49 +1,55 @@
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
-import contentData from "@/data/content.json"
-import { Hero3DVisual } from "@/components/visuals/hero-3d-visuals"
+import WidthWrapper from "@/components/layout/width-wrapper";
+import { Button } from "@/components/ui/button";
+import { Hero3DVisual } from "@/components/visuals/hero-3d-visuals";
+import { ArrowRight, Play } from "lucide-react";
 
 export function HeroSection() {
-  const { hero } = contentData
-
   return (
-    <section className="py-16 lg:py-20 min-h-[85vh] flex items-center">
-      <div className="container mx-auto px-8">
+    <section className="py-20 lg:py-32">
+      <WidthWrapper>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
           <div className="space-y-8">
-            {/* Main heading */}
             <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-none">
-                The AI-powered
+              <h1 className="text-5xl lg:text-7xl font-bold tracking-tight">
+                The mathematical
                 <br />
-                <span className="text-accent">mathematical</span>
+                <span className="text-primary">animation platform</span>
                 <br />
-                animation platform
+                for developers
               </h1>
-              <p className="text-lg md:text-xl text-gray-400 leading-relaxed max-w-xl">
-                Generate Python code for mathematical visualizations, formulas, and animations with AI precision.
+              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
+                Generate Python code for mathematical visualizations and
+                animations with AI precision. Build and deploy GenAI in
+                mission-critical applications.
               </p>
             </div>
 
-            {/* CTA buttons */}
             <div className="flex items-center gap-4">
-              <Button size="lg" className="bg-white text-black hover:bg-gray-100 text-base px-6 py-3 font-medium">
-                Get started
+              <Button
+                size="lg"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4"
+              >
+                <Play className="w-5 h-5 mr-2" />
+                Try for free
               </Button>
-              <Button size="lg" variant="ghost" className="text-gray-300 hover:text-white text-base px-6 py-3 group">
-                View examples
+              <Button
+                size="lg"
+                variant="ghost"
+                className="text-muted-foreground hover:text-foreground group"
+              >
+                Book a demo
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </div>
           </div>
 
           {/* 3D Visual */}
-          <div className="relative h-80 lg:h-96">
+          <div className="relative h-96 lg:h-[500px]">
             <Hero3DVisual />
           </div>
         </div>
-      </div>
+      </WidthWrapper>
     </section>
-  )
+  );
 }

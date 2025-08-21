@@ -13,12 +13,14 @@ import {
   X,
   SidebarCloseIcon,
   SidebarOpenIcon,
+  Search,
 } from "lucide-react";
 import { useChat } from "@/context/ChatProvider";
 import clsx from "clsx";
+import { ChatList } from "../chat/chat-list";
 
 export function Sidebar() {
-  const { chats, deleteChat, renameChat } = useChat();
+  const { chats, deleteChat } = useChat();
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState("");
   const [isOpen, setIsOpen] = useState(true);
@@ -29,7 +31,7 @@ export function Sidebar() {
   };
 
   const handleNewChat = () => {
-    router.push("/new");
+    router.push("/chat");
   };
 
   const handleChatClick = (chatId: string) => {
@@ -43,7 +45,7 @@ export function Sidebar() {
 
   const handleEditSave = () => {
     if (editingId && editTitle.trim()) {
-      renameChat(editingId, editTitle.trim());
+      // renameChat(editingId, editTitle.trim());
     }
     setEditingId(null);
     setEditTitle("");
@@ -62,128 +64,78 @@ export function Sidebar() {
     <div
       className={clsx(
         " shrink-0 h-full bg-sidebar border-r border-sidebar-border flex flex-col",
-        isOpen ? "w-80" : "w-15",
-        "transition-all duration-300 ease-in-out"
+        isOpen ? "w-80" : "w-15"
       )}
     >
       {/* Header */}
-      <div className="p-4 border-b border-sidebar-border flex flex-col gap-4">
+      <div className="p-4 flex flex-col gap-4 ">
         <Button
           onClick={onClose}
           variant={"ghost"}
           className={clsx(
-            "cursor-pointer flex items-center justify-center p-0 size-7 [&_svg]:size-6",
-            isOpen?"self-end":"self-center"
+            "cursor-pointer flex items-center justify-center p-5 rounded-xl size-7 [&_svg]:size-6 text-muted-foreground hover:bg-input/40",
+            isOpen ? "self-end" : "self-center"
           )}
         >
-          {isOpen ? <SidebarCloseIcon /> : <SidebarOpenIcon />}
+          {isOpen ? (
+            <SidebarCloseIcon className="stroke-1" />
+          ) : (
+            <SidebarOpenIcon className="stroke-1" />
+          )}
         </Button>
 
-        <Button
-          onClick={handleNewChat}
-          className=" cursor-pointer flex items-center justify-center w-full bg-sidebar-accent hover:bg-sidebar-accent/80 text-sidebar-accent-foreground border border-sidebar-border"
+        <div
+          className={clsx("flex flex-col w-full items-center transition-all ")}
         >
-          <Plus size={16} />
-          <span
+          <Button
+            onClick={handleNewChat}
+            variant={"link"}
             className={clsx(
-              "overflow-hidden whitespace-nowrap",
-              isOpen
-                ? "ml-2 w-auto opacity-100 delay-150"
-                : "w-0 ml-0 opacity-0",
-              "transition-all duration-300 ease-in-out"
+              "cursor-pointer flex items-center w-full hover:bg-primary/10",
+              {
+                "justify-center p-5 rounded-full": !isOpen,
+                "justify-start ": isOpen,
+              }
             )}
           >
-            New Chat
-          </span>
-        </Button>
+            <span
+              className={clsx(
+                "block bg-primary text-foreground rounded-full p-1"
+              )}
+            >
+              <Plus />
+            </span>
+            <span
+              className={clsx(
+                "ml-2 overflow-hidden whitespace-nowrap transition-all duration-300 ease-in-out",
+                isOpen ? "block" : "hidden"
+              )}
+            >
+              New Chat
+            </span>
+          </Button>
+          <Button
+            variant={"ghost"}
+            className={clsx("w-full hover:bg-input/40 cursor-pointer", {
+              "justify-center p-5 rounded-xl": !isOpen,
+              "justify-start ": isOpen,
+            })}
+          >
+            <Search />
+            <span
+              className={clsx(
+                "ml-2 overflow-hidden whitespace-nowrap",
+                isOpen ? "block" : "hidden"
+              )}
+            >
+              Search chats
+            </span>
+          </Button>
+        </div>
       </div>
 
       {/* Chat List */}
-      <div className="flex-1 overflow-y-auto p-2">
-        {chats.length === 0 ? (
-          <div className="text-center text-sidebar-foreground/60 mt-8">
-            <MessageSquare size={48} className="mx-auto mb-4 opacity-50" />
-            <p>No chats yet</p>
-            <p className="text-sm">Create your first animation</p>
-          </div>
-        ) : (
-          <div className="space-y-1">
-            {chats.map((chat) => (
-              <div
-                key={chat.id}
-                className="group relative p-3 rounded-lg hover:bg-sidebar-accent cursor-pointer transition-colors"
-              >
-                {editingId === chat.id ? (
-                  <div className="flex items-center space-x-2">
-                    <Input
-                      value={editTitle}
-                      onChange={(e) => setEditTitle(e.target.value)}
-                      className="flex-1 bg-sidebar-accent border-sidebar-border text-sidebar-foreground text-sm"
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") handleEditSave();
-                        if (e.key === "Escape") handleEditCancel();
-                      }}
-                      autoFocus
-                    />
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={handleEditSave}
-                      className="text-primary hover:text-primary/80 p-1"
-                    >
-                      <Check size={14} />
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={handleEditCancel}
-                      className="text-destructive hover:text-destructive/80 p-1"
-                    >
-                      <X size={14} />
-                    </Button>
-                  </div>
-                ) : (
-                  <>
-                    <div
-                      onClick={() => handleChatClick(chat.id)}
-                      className="flex-1"
-                    >
-                      <h3 className="text-sidebar-foreground text-sm font-medium truncate">
-                        {chat.title}
-                      </h3>
-                    </div>
-
-                    <div className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity flex space-x-1">
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleEditStart(chat);
-                        }}
-                        className="text-sidebar-foreground/60 hover:text-sidebar-foreground p-1"
-                      >
-                        <Edit2 size={12} />
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDelete(chat.id);
-                        }}
-                        className="text-destructive hover:text-destructive/80 p-1"
-                      >
-                        <Trash2 size={12} />
-                      </Button>
-                    </div>
-                  </>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+      {isOpen && <ChatList />}
     </div>
   );
 }

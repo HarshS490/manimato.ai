@@ -4,7 +4,7 @@
     "logo": "M"
   },
   "links": [
-    { "href": "#product", "label": "Product" },
+    { "href": "#models", "label": "Models" },
     { "href": "#examples", "label": "Examples" },
     { "href": "#pricing", "label": "Pricing" },
     { "href": "#docs", "label": "Docs" }
@@ -13,15 +13,19 @@
     "sections": [
       {
         "title": "Product",
-        "links": ["Features", "Examples", "Pricing", "API"]
+        "links": ["Models", "Examples", "Pricing", "API", "Documentation"]
+      },
+      {
+        "title": "Use Cases",
+        "links": ["Education", "Research", "Content Creation", "Presentations", "Enterprise"]
       },
       {
         "title": "Resources",
-        "links": ["Documentation", "Tutorials", "Blog", "Community"]
+        "links": ["Documentation", "Tutorials", "Blog", "Community", "Support"]
       },
       {
         "title": "Company",
-        "links": ["About", "Contact", "Privacy", "Terms"]
+        "links": ["About", "Contact", "Privacy", "Terms", "Security"]
       }
     ]
   }

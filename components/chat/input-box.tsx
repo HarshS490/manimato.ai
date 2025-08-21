@@ -4,7 +4,8 @@ import type React from "react"
 
 import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Send } from "lucide-react"
+import { ArrowUpIcon, ArrowUpSquareIcon, Send } from "lucide-react"
+import clsx from "clsx"
 
 interface InputBoxProps {
   onSend: (message: string) => void
@@ -45,7 +46,7 @@ export function InputBox({ onSend, disabled = false, placeholder = "Type a messa
   return (
     <div className="relative">
       <form onSubmit={handleSubmit} className="relative">
-        <div className="relative bg-input border border-border rounded-xl shadow-sm focus-within:shadow-md focus-within:ring-1 focus-within:ring-ring transition-all">
+        <div className="box-border p-3 relative bg-muted border border-border rounded-xl shadow-sm focus-within:shadow-md  transition-all">
           <textarea
             ref={textareaRef}
             value={message}
@@ -53,7 +54,7 @@ export function InputBox({ onSend, disabled = false, placeholder = "Type a messa
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
             disabled={disabled}
-            className="w-full bg-transparent text-foreground placeholder-muted-foreground resize-none border-0 outline-none p-4 pr-12 min-h-[56px] max-h-[192px] leading-6"
+            className="mb-3 w-full bg-transparent text-foreground placeholder-muted-foreground resize-none border-0 outline-none pr-12 min-h-[56px] max-h-[192px] leading-6"
             rows={1}
           />
 
@@ -61,9 +62,9 @@ export function InputBox({ onSend, disabled = false, placeholder = "Type a messa
             type="submit"
             size="icon"
             disabled={!message.trim() || disabled}
-            className="absolute right-2 bottom-2 w-8 h-8 bg-primary hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground rounded-lg transition-colors"
+            className={clsx(" size-7 [&_svg]:size-5 cursor-pointer  absolute right-2 bottom-2 bg-primary hover:bg-primary/90 rounded-lg transition-colors")}
           >
-            <Send size={16} />
+            <ArrowUpIcon></ArrowUpIcon>
           </Button>
         </div>
       </form>
